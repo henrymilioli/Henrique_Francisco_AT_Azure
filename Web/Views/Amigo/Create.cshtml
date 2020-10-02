@@ -1,0 +1,75 @@
+﻿@model Web.Models.Amigo.CriarAmigoViewModel
+
+@{
+    ViewData["Title"] = "Criar Amigo";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="Foto" class="control-label"></label>
+                <input type="file" name="Foto" class="form-control" />
+                <span validation-for="Foto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sobrenome" class="control-label"></label>
+                <input asp-for="Sobrenome" class="form-control" />
+                <span asp-validation-for="Sobrenome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefone" class="control-label"></label>
+                <input asp-for="Telefone" class="form-control" />
+                <span asp-validation-for="Telefone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DtAniversario" class="control-label">Data de Aniversário</label>
+                <input asp-for="DtAniversario" type="date" class="form-control" />
+                <span asp-validation-for="DtAniversario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pais.Id" class="control-label">Lista de paises</label>
+                <select asp-for="Pais.Id" class="form-control">
+                    @foreach (var item in ViewBag.Paises)
+                    {
+                        <option value="@item.Id">@item.Nome</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Estado.Id" class="control-label">Lista de paises</label>
+                <select asp-for="Estado.Id" class="form-control">
+                    @foreach (var item in ViewBag.Estados)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Criar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

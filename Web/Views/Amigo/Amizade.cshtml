@@ -1,0 +1,37 @@
+﻿@model Web.Models.Amigo.CriarAmizadeViewModel
+
+@{
+    ViewData["Title"] = "Amizade";
+}
+
+<h1>Amizade</h1>
+
+<h4>CriarAmizadeViewModel</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Amizade" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Amigo.Id" class="control-label">Lista de Pessoas</label>
+                <select asp-for="Amigo.Id" class="form-control">
+                    @foreach (var item in ViewBag.Amigos)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
